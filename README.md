@@ -13,11 +13,11 @@ git clone https://github.com/svetlyo81/godot-nemo
 
 ### Building llama.cpp
 
-'''
+```
 cd llama.cpp
 mkdir build
 cd build
-'''
+```
 
 #### CUDA build
 
@@ -27,10 +27,10 @@ CUDA/bin/cublas64_XX.dll -> godot/bin
 CUDA/bin/cublasLt64_XX.dll -> godot/bin
 CUDA/bin/cudart64_XX.dll -> godot/bin
 
-'''
+```
 cmake .. -DBUILD_SHARED_LIBS=ON -DGGML_CUDA=ON
 cmake --build . --config Release
-'''
+```
 
 Copy the files to the respective folders:
 
@@ -47,19 +47,19 @@ https://github.com/msys2/msys2-installer/releases/download/2024-12-08/msys2-x86_
 
 Run the following commands in the UCRT64 terminal:
 
-'''
+```
 pacman -S git \
     mingw-w64-ucrt-x86_64-gcc \
     mingw-w64-ucrt-x86_64-cmake \
     mingw-w64-ucrt-x86_64-vulkan-devel \
     mingw-w64-ucrt-x86_64-shaderc \
     mingw-w64-ucrt-x86_64-scons
-'''
+```
 
-'''
+```
 cmake .. -DBUILD_SHARED_LIBS=ON -DGGML_VULKAN=1
 cmake --build . --config Release
-'''
+```
 
 llama.cpp/build/bin/release/libggml.dll -> godot/bin
 llama.cpp/build/bin/release/libllama.dll -> godot/bin
@@ -73,28 +73,28 @@ msys2/ucrt64/bin/libwinpthread-1.dll -> godot/bin
 
 ### Building stable-diffusion.cpp
 
-'''
+```
 cd stable-diffusion.cpp
 mkdir build
 cd build
-'''
+```
 
 #### CUDA build
 
-'''
+```
 cmake .. -DSD_BUILD_SHARED_LIBS=ON -DSD_CUDA=ON
 cmake --build . --config Release
-'''
+```
 
 stable-diffusion.cpp/build/bin/release/stable-diffusion.dll -> godot/bin
 stable-diffusion.cpp/build/release/stable-diffusion.lib -> godot/modules/gdllama/diffusion-win
 
 #### Vulkan build
 
-'''
+```
 cmake .. -DSD_BUILD_SHARED_LIBS=ON -DSD_VULKAN=ON
 cmake --build . --config Release
-'''
+```
 
 stable-diffusion.cpp/build/bin/libstable-diffusion.dll -> godot/bin
 stable-diffusion.cpp/build/libstable-diffusion.dll.a -> godot/modules/gdllama/diffusion-win
@@ -105,15 +105,15 @@ stable-diffusion.cpp/build/libstable-diffusion.dll.a -> godot/modules/gdllama/di
 
 Generate Visual Studio solution:
 
-'''
+```
 scons platform=windows vsproj=yes dev_build=yes
-'''
+```
 
 Build without debug symbols (dev_build=yes for debug build):
 
-'''
+```
 scons platform=windows dev_build=no
-'''
+```
 
 Adding the --clean parameter to the command above will clean the respective build.
 
