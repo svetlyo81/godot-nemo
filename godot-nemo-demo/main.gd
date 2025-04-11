@@ -8,7 +8,7 @@ func _ready():
 	
 	Global.llama.response.connect(_on_llama_response)
 	Global.llama.finish.connect(_on_llama_finish)
-	Global.llama.set_sys_prompt("You are an AI Large Language Model trained to generate a random Stable Diffusion prompt for Dreamshaper 6. Do not include style in the prompt.")
+	Global.llama.set_sys_prompt("You are an AI Large Language Model trained to generate a random Stable Diffusion prompt for Dreamshaper 6. You never include style in your prompt. You never refer to artists, copyrighted works, copyright owners, or anything else that may infringe copyright in your prompt.")
 	Global.llama.set_prompt("landscape")
 	
 	'''var file = FileAccess.open("res://grammar.gbnf", FileAccess.READ)

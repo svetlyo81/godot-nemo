@@ -1,6 +1,6 @@
 # godot-nemo
 
-Godot-Nemo is my custom Godot Engine build that can run Mistral-Nemo-Instruct-2407 (the 12b model) and SD 1.5 finetunes based on Godot 4.3 and the Godot LLM plugin, llama.cpp, and stable-diffusion.cpp. It targets Windows OS version 10 and later and graphics hardware with 8GB or more VRAM.
+Godot-Nemo is my custom Godot Engine build that can run Mistral-Nemo-Instruct-2407 (the 12b model) and SD 1.5 finetunes based on Godot 4.3 and the Godot LLM plugin, llama.cpp, and stable-diffusion.cpp. It targets Windows 10 and Vulkan compatible GPUs with 6GB VRAM.
 
 ## Compiling the source
 
