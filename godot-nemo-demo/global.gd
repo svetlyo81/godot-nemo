@@ -32,4 +32,28 @@ func _ready():
 	# https://huggingface.co/lllyasviel/ControlNet-v1-1/blob/main/control_v11f1p_sd15_depth.pth
 	# sd -M convert -m control_v11f1p_sd15_depth.pth -o control_depth.gguf -v --type q8_0
 	#Global.diffusion.set_control_path(modelPath + "control_depth.gguf")
+
+func diffusion_start() -> PackedByteArray:
+	var buffer = diffusion.start()
+	var alloc_fails = diffusion.get_alloc_fail_count()
 	
+	if alloc_fails == 1:
+		diffusion.freeModel()
+		llama.freeModel()
+		llama.set_should_use_gpu(true)
+		
+		if llama.set_gpu_free_mem(8000):
+			llama.initialize()
+			buffer = diffusion.start()
+			alloc_fails = diffusion.get_alloc_fail_count()
+		else:
+			alloc_fails = 2
+		
+		if alloc_fails == 2:
+			diffusion.freeModel()
+			llama.freeModel()
+			llama.set_should_use_gpu(false)
+			llama.initialize()
+			buffer = diffusion.start()
+	
+	return buffer

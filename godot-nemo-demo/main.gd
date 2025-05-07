@@ -61,7 +61,7 @@ func _deferred_llama_finish():
 
 func diffusion_test():
 	var image = Image.new()
-	image.load_png_from_buffer(Global.diffusion.start())
+	image.load_png_from_buffer(Global.diffusion_start())
 	var texture = ImageTexture.create_from_image(image)
 	call_deferred("_deferred_diffusion_finish", texture)
 func _deferred_diffusion_finish(val:ImageTexture):
