@@ -1,6 +1,6 @@
 # godot-nemo
 
-Godot-Nemo is my custom Godot Engine build that can run Mistral-Nemo-Instruct-2407 (the 12b model) and SD 1.5 finetunes based on Godot 4.3 and the Godot LLM plugin, llama.cpp, and stable-diffusion.cpp. It targets Windows 10 and Vulkan compatible GPUs with 6GB VRAM.
+Godot-Nemo is my custom Godot Engine build that can run Mistral-Nemo-Instruct-2407 (the 12b model) and SDXL finetunes based on Godot 4.3 and the Godot LLM plugin, llama.cpp, and stable-diffusion.cpp. It targets Windows 10 and Vulkan compatible GPUs with 6GB VRAM.
 
 ## Compiling the source
 
@@ -157,14 +157,9 @@ mxbai-embed-large-v1.Q5_K_M.gguf
 https://huggingface.co/ChristianAzinn/mxbai-embed-large-v1-gguf/blob/main/mxbai-embed-large-v1.Q5_K_M.gguf
 
 
-dreamshaper_631BakedVae.safetensors (pruned)
+DreamShaperXL_Lightning-SFW.safetensors
 
-https://civitai.com/models/4384?modelVersionId=94081
-
-
-lcm-lora-sdv1-5.safetensors
-
-https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/blob/main/pytorch_lora_weights.safetensors
+https://huggingface.co/Lykon/dreamshaper-xl-lightning/blob/main/DreamShaperXL_Lightning-SFW.safetensors
 
 
 The Godot Editor binaries will be placed in godot/bin, run the console one and drag the godot-nemo-demo folder in the Editor window the first time you open the demo.

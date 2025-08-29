@@ -24,14 +24,8 @@ func _ready():
 	
 	diffusion = Diffusion.new()
 	
-	# https://huggingface.co/latent-consistency/lcm-lora-sdv1-5/blob/main/pytorch_lora_weights.safetensors -> lcm-lora-sdv1-5.safetensors
-	
-	# https://civitai.com/models/4384?modelVersionId=94081
-	diffusion.set_path(modelPath + "dreamshaper_631BakedVae.safetensors")
-	
-	# https://huggingface.co/lllyasviel/ControlNet-v1-1/blob/main/control_v11f1p_sd15_depth.pth
-	# sd -M convert -m control_v11f1p_sd15_depth.pth -o control_depth.gguf -v --type q8_0
-	#Global.diffusion.set_control_path(modelPath + "control_depth.gguf")
+	# https://huggingface.co/Lykon/dreamshaper-xl-lightning/blob/main/DreamShaperXL_Lightning-SFW.safetensors
+	diffusion.set_path(modelPath + "DreamShaperXL_Turbo-Lightning-SFW.safetensors")
 
 func diffusion_start() -> PackedByteArray:
 	var buffer = diffusion.start()
