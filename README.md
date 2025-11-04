@@ -1,6 +1,6 @@
 # godot-nemo
 
-Godot-Nemo is my custom Godot Engine build that can run Mistral-Nemo-Instruct-2407 (the 12b model) and SDXL finetunes based on Godot 4.3 and the Godot LLM plugin, llama.cpp, and stable-diffusion.cpp. It targets Windows 10 and Vulkan compatible GPUs with 6GB VRAM.
+Godot-Nemo is my custom Godot Engine build that can run Mistral-Nemo-Instruct-2407 (the 12b model) and SDXL finetunes based on Godot 4 and the Godot LLM plugin, llama.cpp, stable-diffusion.cpp, and OpenCV. It targets Windows 10 and Vulkan compatible GPUs with 6GB VRAM.
 
 ## Compiling the source
 
@@ -11,6 +11,10 @@ git clone https://github.com/svetlyo81/llama.cpp
 git clone https://github.com/svetlyo81/stable-diffusion.cpp
 git clone https://github.com/svetlyo81/godot
 git clone https://github.com/svetlyo81/godot-nemo
+
+git clone https://github.com/opencv/opencv.git -b 4.x
+cd opencv
+git clone https://github.com/opencv/opencv_contrib -b 4.x
 ```
 
 ### Building llama.cpp
@@ -118,6 +122,44 @@ stable-diffusion.cpp/build/bin/libstable-diffusion.dll -> godot/bin
 
 stable-diffusion.cpp/build/libstable-diffusion.dll.a -> godot/modules/gdllama/diffusion-win
 
+### Building OpenCV
+
+```
+cd opencv
+mkdir build
+cd build
+```
+
+#### Visual Studio 2022
+
+```
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DBUILD_opencv_legacy=OFF -DBUILD_EXAMPLES=ON -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules ..
+cmake --build . --config Release -j 7
+cmake --install . --config Release
+```
+
+build/install/include/opencv2 -> $(VC_IncludePath), for example:
+Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/include
+
+all the .lib files in build/install/x64/vc17/lib -> $(VC_LibraryPath_x64), for example:
+Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/lib/x64
+
+build/bin/Release/ opencv_core4130.dll opencv_imgproc4130.dll opencv_imgcodecs4130.dll opencv_dnn4130.dll opencv_dnn_superres4130.dll -> godot/bin
+
+#### MSYS2
+
+```
+cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/mingw64 -DBUILD_SHARED_LIBS=ON -DWITH_DSHOW=OFF -DWITH_MSMF=OFF -DBUILD_opencv_legacy=OFF -DBUILD_EXAMPLES=ON -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules ..
+ninja
+ninja install
+```
+
+msys2\mingw64\include\opencv2 -> msys2\ucrt64\include
+
+all the .a files in msys2\mingw64\x64\mingw\lib -> msys2\ucrt64\lib
+
+msys2\mingw64\x64\mingw\bin\ libopencv_core4130.dll libopencv_imgproc4130.dll libopencv_imgcodecs4130.dll libopencv_dnn4130.dll libopencv_dnn_superres4130.dll -> godot/bin
+
 ### Building Godot
 
 #### Visual Studio 2022
@@ -166,7 +208,7 @@ The Godot Editor binaries will be placed in godot/bin, run the console one and d
 
 ## On the dangers of AI
 
-I think the main danger of using AI in games is reproducing copyrighted material. This can happen without AI too and anyone can sue anybody for anything. In a real world game application you may want to query the LLM with the user prompt to detect mentions of copyrighted material and use depth maps and img2img to control image generation. There is also concern that some users may become attached to fictional AI characters and consequently be manipulated by them to do something or be exploited in some way.
+I think the main danger of using AI in games is reproducing copyrighted material. This can happen without AI too and anyone can sue anybody for anything. In a real world game application you may want to query the LLM with the user prompt to detect mentions of copyrighted material and use img2img to control image generation. There is also concern that some users may become attached to fictional AI characters and consequently be manipulated by them to do something or be exploited in some way.
 
 I don't have actual experience in any of this, also I'm not responsible for others but with all the controversy surrounding AI I felt that I should at least mention it. Again, with more than 50% of humans believeing either/both that the Earth is flat and that there's an invisible man watching them from the sky at all times personally I consider humans to be the danger at this time. They're more likely to do somebody harm than admit they're wrong about something. I wish it was a joke but beware the dangers.
 
@@ -179,3 +221,5 @@ I don't have actual experience in any of this, also I'm not responsible for othe
 [llama.cpp](https://github.com/ggerganov/llama.cpp)
 
 [stable-diffusion.cpp](https://github.com/leejet/stable-diffusion.cpp)
+
+[OpenCV](https://github.com/opencv)

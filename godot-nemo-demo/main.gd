@@ -45,7 +45,6 @@ func _deferred_llama_finish():
 		#Global.diffusion.set_param("strength", 1.0)
 		#Global.diffusion.set_param("guidance", 3.5)
 		#Global.diffusion.set_param("enable_taesd", 1)
-		Global.diffusion.set_param("enable_vae_tiling", 1)
 		
 		'''var image = Image.load_from_file("res://reference_image.png") # img2img
 		Global.diffusion.set_image(image.save_png_to_buffer())

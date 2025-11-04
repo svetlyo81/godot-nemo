@@ -3,4 +3,4 @@
 /android/
 *.gguf
 *.safetensors
-llm.db
+*.db
